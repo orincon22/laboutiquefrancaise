@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mi cuenta - La Boutique Francaise{% endblock %}
+
+{% block content %}
+    <h1>Mi cuenta</h1>
+    Bienvenido {{ app.user.firstname }} a mi cuenta. Este es un espacio que permitira genera toda la informacion personal.
+    <hr>
+    <a href="{{ path('account_password') }}">Modificar mi contraseña</a><br/>
+    - Agregar direcciones<br/>
+    - Mis pedidos<br/>
+    <hr>
+
+{% endblock %}
