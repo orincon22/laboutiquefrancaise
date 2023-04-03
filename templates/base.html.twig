@@ -10,7 +10,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/boutiquefrancaise.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/boutiquefrancaise.css') }}?v={{ random() }}">
 
     <style>
         .bd-placeholder-img {
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ path('products') }}">Productos</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Nosotros</a>
