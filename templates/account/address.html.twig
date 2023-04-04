@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mis direcciones - La Boutique Francaise{% endblock %}
+
+{% block content %}
+    <a href="{{ path('account_address_add') }}" class="btn btn-info btn-sm float-right">Agregar una dirección</a>
+    <h1>Mis direcciones</h1>
+    Dentro de este espacion se administraran los domicilios. <br/>
+    <a href="{{ path('account_address') }}">Regresar</a>
+    <hr>
+    {% if app.user.addresses|length == 0 %}
+        <p class="text-center">
+            No se encontraron domicilios agregados a la cuenta. Para agregar uno, por favor <a href="">haga clic aqui.</a>
+        </p>
+    {% else %}
+
+            <div class="row">
+                {% for address in app.user.addresses %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ address.name }}</h5>
+                                <p class="card-text">
+                                    {{ address.address }}.<br/>
+                                    {{ address.postal }} - {{ address.city }} - {{ address.country }}
+                                </p>
+                                <a href="{{ path('account_address_edit', {'id' : address.id }) }}">Modificar</a> | <a href="{{ path('account_address_delete', {'id' : address.id}) }}">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+    {% endif %}
+{% endblock %}
