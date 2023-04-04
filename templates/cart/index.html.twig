@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mi carrito - La Boutique Francaise{% endblock %}
+
+{% block content %}
+    <h1>Mi carrito</h1>
+    Encontrar todos los productos
+
+    {% if cart|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col"></th>
+                <th scope="col">Catidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set total = null %}
+            {% for product in cart %}
+            <tr>
+                <th>
+                    <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
+                </th>
+                <td>
+                    {{ product.product.name }}<br/>
+                    <small>{{ product.product.subtitle }}</small>
+                </td>
+                <td>x {{ product.quantity }}</td>
+                <td>{{ (product.product.price) |number_format(2,'.',',')  }}</td>
+                <td>{{ (product.product.price * product.quantity ) |number_format(2,'.',',')  }}</td>
+                <td>
+                    <a href="{{ path('delete_to_cart', {'id':product.product.id}) }}">
+                        <img src="{{ asset('assets/img/delete.png') }}" height="15px" alt="Eliminar producto">
+                    </a>
+
+                </td>
+            </tr>
+                {% set total = total + (product.product.price * product.quantity) %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right mb-5">
+            <b>Cantidad de productos: </b>{{ cart|length }}<br/>
+            <b>Total de mi carrito: </b> {{ ( total ) |number_format(2,'.',',') }} MXN
+            <a href="" class="btn btn-success btn-block">Validad mi carrito</a>
+        </div>
+    {% else %}
+        <hr>
+        <p><b>Su carrito esta vacio.</b></p>
+    {% endif %}
+{% endblock %}
